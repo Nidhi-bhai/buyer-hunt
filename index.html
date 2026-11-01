@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buyer Hunt: 30 people asking for your product, in 24h</title>
+<meta name="description" content="For founders with 0 sales. We find 30 real people on X who posted in the last 14 days asking for what you built, with a ready-to-send reply for each. $49, delivered in 24 hours.">
+<style>body{font-family:system-ui,sans-serif;max-width:680px;margin:40px auto;padding:0 18px;line-height:1.55;color:#111;background:#fafafa}h1{font-size:2rem;line-height:1.2}.box{background:#fff;border:1px solid #ddd;border-radius:10px;padding:18px;margin:18px 0}input{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #bbb;border-radius:6px;box-sizing:border-box}.price{font-size:1.6rem;font-weight:700}.muted{color:#555;font-size:.92rem}li{margin:6px 0}#ok{display:none;background:#e9ffe9;border-color:#7c7}</style></head><body>
+<h1>You shipped. Nobody bought. The buyers exist. They're posting right now.</h1>
+<p>Every week, people post on X: <i>"is there a tool that…"</i>, <i>"looking for an app to…"</i>, <i>"I'd pay for…"</i>. Those are your first customers. You don't see them because finding them takes hours of searching.</p>
+<div class="box"><b>What you get within 24 hours (one spreadsheet + doc):</b><ul>
+<li><b>30 real X posts</b> from the last 14 days where someone describes the problem your product solves, each with link, date and the author's handle.</li>
+<li><b>A tailored reply for every post</b>, helpful first and no copy-paste spam, so you can answer as yourself.</li>
+<li><b>The 5 search phrases</b> your buyers actually use, so you can repeat the hunt yourself every week.</li></ul>
+<p class="muted">Honest limits: we find and draft. You send the replies from your own account. We don't promise sales; we promise 30 real, recent, relevant posts. If we can't find 30, you get the rest of your money back pro rata, automatically.</p></div>
+<div class="box"><span class="price">$49</span> <span class="muted">one-time · 24h delivery · launch price for the first 20 orders</span>
+<p class="muted">One paying customer from these replies covers it. Doing it yourself takes about 6 hours of searching.</p>
+<label>Your product URL<input id="url" placeholder="https://yourproduct.com" required></label>
+<label>Email for delivery<input id="email" type="email" placeholder="you@email.com" required></label>
+<label>Who is it for? (one line, optional)<input id="who" placeholder="e.g. freelance designers who hate invoicing"></label>
+<div id="err" class="muted" style="color:#b00"></div><div id="pp"></div></div>
+<div class="box" id="ok"><b>Paid. Your hunt has started.</b> Delivery goes to your email within 24 hours. Order ID: <span id="oid"></span></div>
+<p class="muted">Questions: nidhi69n@gmail.com · Payments by PayPal (cards accepted).</p>
+<script src="https://www.paypal.com/sdk/js?client-id=BAAb5cq2I0Xx3lFhRJNBjnuGCVT5VDtWfWHgAuSasCoaA_F4cFzLmDWcDmYhsXG6panQVSaRPR3gvrgE9w&currency=USD&intent=capture"></script>
+<script>
+function v(){const u=document.getElementById('url').value.trim(),e=document.getElementById('email').value.trim();if(!/^https?:\/\/\S+\.\S+/.test(u)||!/\S+@\S+\.\S+/.test(e)){document.getElementById('err').textContent='Add your product URL (with https://) and a valid email first.';return null}document.getElementById('err').textContent='';return{u,e,w:document.getElementById('who').value.trim()}}
+paypal.Buttons({onClick:(d,a)=>v()?a.resolve():a.reject(),
+createOrder:(d,a)=>{const x=v();return a.order.create({purchase_units:[{amount:{value:'49.00',currency_code:'USD'},description:('Buyer Hunt | '+x.u+' | '+x.e+' | '+x.w).slice(0,127),custom_id:x.e.slice(0,127)}],application_context:{shipping_preference:'NO_SHIPPING'}})},
+onApprove:(d,a)=>a.order.capture().then(o=>{document.getElementById('ok').style.display='block';document.getElementById('oid').textContent=o.id;document.getElementById('ok').scrollIntoView()}),
+onError:e=>{document.getElementById('err').textContent='Payment did not go through. Try again or email nidhi69n@gmail.com.'}}).render('#pp');
+</script></body></html>
